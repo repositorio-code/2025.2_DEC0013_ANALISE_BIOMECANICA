@@ -1,323 +1,117 @@
-# Template de Projeto de Software Completo
+# Análise Biomecânica
+> 🎓 Aplicação de Análise Biomecânica Remota via Visão Computacional 
+> Solução híbrida Client-Server para processamento de marcha e cinemática utilizando Google Colab e Interface Desktop.
 
-> 🎓 **Template Institucional para Desenvolvimento de Software**  
-> Estrutura padronizada para projetos acadêmicos e profissionais
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![Status](https://img.shields.io/badge/Status-Em_Desenvolvimento-yellow)
+![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-lightgrey)
 
-![Status](https://img.shields.io/badge/Status-Template-blue)
-![Version](https://img.shields.io/badge/Version-1.0.0-green)
-![License](https://img.shields.io/badge/License-MIT-blue.svg)
-![Academic](https://img.shields.io/badge/Academic-Template-orange)
+## 📋 Visão Geral Sobre o Projeto
 
-## 📋 Visão Geral
+Este projeto foi desenvolvido no contexto acadêmico de Engenharia de Computação (UFSC) na disciplina de **Projeto Integrador I**. Consiste em uma **aplicação desktop (GUI)** que atua como *frontend* para um notebook de análise biomecânica de alto desempenho hospedado no **Google Colab**. 
 
-Este template foi desenvolvido para **instituições de ensino** e serve como base padronizada para todos os projetos de software desenvolvidos por alunos e professores. Ele abrange desde projetos simples de disciplinas até trabalhos de conclusão de curso (TCCs) complexos.
+O objetivo é democratizar o acesso a algoritmos avançados de visão computacional e biomecânica, encapsulando a complexidade do código Python em uma interface amigável, permitindo que usuários com computadores modestos utilizem o poder de processamento (GPUs) do Google Colab. A comunicação é realizada via API REST, utilizando um túnel de conexão para ligar a máquina local ao ambiente de nuvem. usuários com computadores modestos utilizem o poder de processamento (GPUs) do Google Colab.
 
-### 🎯 Objetivos do Template
+## 🎯 O Problema
 
-- ✅ **Padronização**: Estrutura consistente para todos os projetos
-- ✅ **Boas Práticas**: Incorpora padrões da indústria de software
-- ✅ **Didático**: Documentação educativa em cada componente
-- ✅ **Escalabilidade**: Suporta desde MVPs até sistemas complexos
-- ✅ **Colaboração**: Facilita trabalho em equipe e avaliação
-- ✅ **Profissionalização**: Prepara para o mercado de trabalho
+Notebooks Python (Jupyter/Colab) são ferramentas excelentes para desenvolvimento e pesquisa, mas apresentam uma **alta barreira de entrada** para usuários finais, como fisioterapeutas e profissionais de educação física.
 
-## 🏗️ Arquitetura do Template
+A necessidade de rodar células de código, configurar ambientes e gerenciar dependências torna o uso prático inviável em um ambiente clínico.
 
+## 🚀 A Solução
+
+Desenvolvemos uma arquitetura híbrida (**Desktop + Colab**):
+1.  **Backend (Google Colab):** Onde ocorre o processamento pesado (Machine Learning/Visão Computacional). O notebook expõe endpoints via API.
+2.  **Túnel (Ngrok/Cloudflared):** Expõe a porta do Colab para a internet segura.
+3.  **Frontend (Desktop App):** Uma aplicação executável (.exe) onde o usuário carrega vídeos, clica em "Analisar" e visualiza os relatórios.
+
+> **Resultado:** O profissional tem o poder da nuvem com a simplicidade de um software nativo.
+
+## 🎯 Funcionalidades Principais
+
+- ✅ Processamento em Nuvem: Executa algoritmos pesados (MeTRAbs, JAX, MuJoCo) em GPUs T4 no Google Colab.
+- ✅ Cliente Desktop Amigável: Interface local em PyQt5 para gerenciamento de tarefas.
+- ✅ Automação Total: Script Selenium (undetected-chromedriver) que liga e configura o servidor Colab automaticamente.
+- ✅ Análise Flexível: Seleção dinâmica de articulações (Joelho, Quadril, Tornozelo, Membros Superiores).
+- ✅ Relatórios Completos: Gera gráficos de ângulos, fases da marcha, erro de Kalman e vídeo com overlay do esqueleto.
+
+## 🏗️ Arquitetura do Sistema
+
+O sistema opera em uma arquitetura híbrida Cliente-Servidor via túnel HTTP seguro (ngrok por padão).
 ```
-template-software/
-├── 📁 backend/              # Servidor e APIs
-├── 📁 frontend/             # Interface do usuário
-├── 📁 mobile/               # Aplicação mobile (opcional)
-├── 📁 database/             # Scripts e schemas de banco de dados
-├── 📁 docs/                 # Documentação completa
-├── 📁 tests/                # Testes automatizados
-├── 📁 devops/               # CI/CD, Docker, Kubernetes
-├── 📁 scripts/              # Scripts de automação
-├── 📁 config/               # Configurações de ambiente
-├── 📁 assets/               # Recursos estáticos e media
-├── 📁 .github/              # Templates do GitHub
-├── 📄 README.md             # Este arquivo
-├── 📄 CONTRIBUTING.md       # Guia de contribuição
-├── 📄 LICENSE               # Licença do projeto
-├── 📄 CHANGELOG.md          # Histórico de mudanças
-└── 📄 docker-compose.yml    # Orquestração de containers
+2025.2_DEC0013_ANALISE_BIOMECANICA/
+├── 📁 backend/                 # Código do lado do Servidor (Nuvem)
+│   └── 📄 server.ipynb         # Notebook Colab (FastAPI + AI Models)
+├── 📁 frontend/                # Aplicação Desktop (Local)
+│   ├── 📄 main.py              # Interface Gráfica (PyQt5)
+├── 📁 script/                  # Código do lado do Servidor (Nuvem)
+│   ├── 📄 colab_manager.py     # Automação do Browser (Selenium)
+├── 📄 requirements.txt         # Dependências locais
+└── 📄 README.md                # Documentação
 ```
 
-## 🚀 Como Usar Este Template
+## Requisitos
 
-### 1. **Preparação Inicial**
+> Python >=3.10.0
 
+## Configuração do Ambiente
+
+1. Preparação Inicial (Cliente)
 ```bash
-# Clone ou baixe este template
-git clone [url-do-template] meu-projeto
-cd meu-projeto
+# Clonar o repositório 2025.2_DEC0013_ANALISE_BIOMECANICA
+git clone https://github.com/repositorio-code/2025.2_DEC0013_ANALISE_BIOMECANICA.git
 
-# Remova o histórico do git do template
-rm -rf .git
+cd 2025.2_DEC0013_ANALISE_BIOMECANICA
 
-# Inicialize um novo repositório
-git init
-git add .
-git commit -m "feat: estrutura inicial do projeto"
+# Instalar as dependências utilizando o requirements.txt
+pip install -r requirements.txt
+
+bash: pip install pyqt5 requests undetected-chromedriver
 ```
 
-### 2. **Personalização**
+2. Configuração do Servidor (Colab)
+- Faça o upload do arquivo server.ipynb para o seu Google Drive.
+- Atualize a constante NOTEBOOK_URL no arquivo frontend/main.py com o link do seu notebook.
+- Importante: No notebook, configure seu NGROK_TOKEN e NGROK_DOMAIN (opcional) para garantir a conexão estável.
 
-1. **Substitua os placeholders** `[NOME_DO_PROJETO]` em todos os arquivos
-2. **Atualize as informações** nos arquivos de documentação
-3. **Configure as tecnologias** específicas do seu projeto
-4. **Remova componentes** que não serão utilizados (ex: mobile, se não houver app)
-
-### 3. **Configuração do Ambiente**
-
+3. Executando a Análise
 ```bash
-# Backend (exemplo com Node.js/Python)
-cd backend
-# Siga as instruções no README.md do backend
+python frontend/main.py
 
-# Frontend (exemplo com React/Vue/Angular)
-cd frontend
-# Siga as instruções no README.md do frontend
+# Clonar o repositório 2025.2_DEC0013_ANALISE_BIOMECANICA
+git clone https://github.com/repositorio-code/2025.2_DEC0013_ANALISE_BIOMECANICA.git
 
-# Database
-cd database
-# Siga as instruções no README.md do database
+cd 2025.2_DEC0013_ANALISE_BIOMECANICA
+
+# Instalar as dependências utilizando o requirements.txt
+pip install -r requirements.txt
+
+bash: pip install pyqt5 requests undetected-chromedriver
 ```
+    `bash: `
 
-## 📚 Tipos de Projeto Suportados
+## Fluxo de Trabalho:
+1. Boot do Servidor: Na seção "0. Controle", clique em 🚀 LIGAR COLAB. O sistema abrirá um navegador, conectará ao Colab e executará as células.
+2. Conexão: Copie a URL gerada pelo ngrok (exibida no log do Colab ou terminal) e cole no campo "URL Estática Ngrok".
+3. Upload: Selecione o vídeo (.mp4) e a articulação desejada (ex: Joelho).
+4. Processamento: Clique em INICIAR ANÁLISE. O sistema fará o upload, processará o vídeo e aguardará o retorno.
+5. Resultados: Ao finalizar, dê um duplo clique nos itens da lista para baixar os gráficos e vídeos gerados.
 
-### 🎓 **Projetos Acadêmicos**
-
-- **Disciplinas de Programação**: Web apps simples, APIs básicas
-- **Engenharia de Software**: Sistemas completos com documentação
-- **Banco de Dados**: Sistemas com modelagem e otimização
-- **Redes**: Aplicações distribuídas e microserviços
-- **IA/ML**: Sistemas inteligentes com análise de dados
-- **Segurança**: Aplicações com foco em cybersecurity
-
-### 🏢 **Projetos Profissionais**
-
-- **MVPs**: Produtos mínimos viáveis para startups
-- **Sistemas Corporativos**: ERP, CRM, sistemas internos
-- **E-commerce**: Lojas virtuais completas
-- **SaaS**: Software como serviço
-- **APIs Públicas**: Serviços para terceiros
-- **Aplicações Mobile**: Apps nativos e híbridos
-
-## 🛠️ Stack Tecnológica Sugerida
-
-### **Backend**
-- **Node.js** + Express/Fastify + TypeScript
-- **Python** + Django/FastAPI
-- **Java** + Spring Boot
-- **C#** + .NET Core
-- **Go** + Gin/Echo
+## 🛠️ Stack Tecnológica
 
 ### **Frontend**
-- **React** + TypeScript + Vite
-- **Vue.js** + TypeScript + Nuxt
-- **Angular** + TypeScript
-- **Svelte** + SvelteKit
+- **Linguagem: Python 3**
+- **GUI: PyQt5 (Widgets, Threading, Signals)**
+- **Automação: Selenium (Undetected Chromedriver)**
+- **Comunicação: Requests (HTTP REST)**
+- **Backend (Servidor Remoto)**
 
-### **Mobile**
-- **React Native** (multiplataforma)
-- **Flutter** (multiplataforma)
-- **Swift** (iOS nativo)
-- **Kotlin** (Android nativo)
-
-### **Banco de Dados**
-- **PostgreSQL** (relacional)
-- **MongoDB** (NoSQL)
-- **Redis** (cache)
-- **SQLite** (desenvolvimento/testes)
-
-### **DevOps & Cloud**
-- **Docker** + Docker Compose
-- **Kubernetes** (projetos avançados)
-- **GitHub Actions** (CI/CD)
-- **AWS/Azure/GCP** (cloud)
-
-## 📖 Documentação por Componente
-
-Cada diretório possui seu próprio `README.md` com:
-
-- 📋 **Propósito** do componente
-- 🛠️ **Tecnologias** recomendadas
-- 📦 **Estrutura** de pastas detalhada
-- 🔧 **Configuração** e setup
-- 📝 **Boas práticas** específicas
-- 🧪 **Estratégias de teste**
-- 🚀 **Deploy** e produção
-
-### Navegação Rápida
-
-| Componente | Descrição | README |
-|------------|-----------|---------|
-| 🖥️ [Backend](backend/) | APIs, serviços, lógica de negócio | [📖](backend/README.md) |
-| 🎨 [Frontend](frontend/) | Interface do usuário web | [📖](frontend/README.md) |
-| 📚 [Docs](docs/) | Documentação técnica completa | [📖](docs/README.md) |
-| ⚙️ [Scripts](scripts/) | Automação e utilitários | [📖](scripts/README.md) |
-
-## 🎯 Fluxo de Desenvolvimento Recomendado
-
-### **1. Planejamento** 📋
-- Definir requisitos funcionais e não-funcionais
-- Criar user stories e casos de uso
-- Planejar arquitetura e tecnologias
-- Definir cronograma e milestones
-
-### **2. Design** 🎨
-- Criar wireframes e protótipos
-- Definir identidade visual
-- Modelar banco de dados
-- Documentar APIs
-
-### **3. Desenvolvimento** 💻
-- Setup do ambiente de desenvolvimento
-- Implementação seguindo TDD/BDD
-- Code reviews regulares
-- Integração contínua
-
-### **4. Testes** 🧪
-- Testes unitários (>80% coverage)
-- Testes de integração
-- Testes E2E
-- Testes de performance
-
-### **5. Deploy** 🚀
-- Ambiente de staging
-- Deploy automatizado
-- Monitoramento e logs
-- Backup e recuperação
-
-## 📐 Padrões e Convenções
-
-### **Commits**
-```bash
-# Formato: tipo(escopo): descrição
-feat(backend): adiciona autenticação JWT
-fix(frontend): corrige bug na validação de formulário
-docs(readme): atualiza instruções de instalação
-test(api): adiciona testes para endpoint de usuários
-```
-
-### **Branches**
-```bash
-main           # Código em produção
-develop        # Código em desenvolvimento
-feature/*      # Novas funcionalidades
-bugfix/*       # Correções de bugs
-hotfix/*       # Correções urgentes em produção
-release/*      # Preparação para release
-```
-
-### **Versionamento**
-- Seguir [Semantic Versioning](https://semver.org/)
-- Formato: `MAJOR.MINOR.PATCH`
-- Exemplo: `1.2.3`
-
-## 👥 Para Estudantes
-
-### **📚 Disciplinas que Podem Usar Este Template**
-
-- **Programação Web**: Frontend + Backend básico
-- **Banco de Dados**: Foco na pasta database
-- **Engenharia de Software**: Projeto completo com documentação
-- **DevOps**: Foco em CI/CD e containerização
-- **Arquitetura de Software**: Microserviços e padrões
-- **Projeto Integrador**: Sistema completo
-- **TCC**: Desenvolvimento profissional completo
-
-### **🎓 Níveis de Complexidade**
-
-**🟢 Básico (1º-2º ano)**
-- Usar apenas frontend + backend simples
-- Banco de dados SQLite
-- Deploy manual
-
-**🟡 Intermediário (3º-4º ano)**
-- Adicionar testes automatizados
-- CI/CD básico
-- Banco de dados robusto
-
-**🔴 Avançado (TCC/Pós)**
-- Arquitetura completa
-- Microserviços
-- Cloud deployment
-- Monitoramento
-
-## 👨‍🏫 Para Professores
-
-### **📋 Critérios de Avaliação Sugeridos**
-
-- **Código (40%)**
-  - Qualidade e organização
-  - Padrões e convenções
-  - Testes automatizados
-
-- **Documentação (25%)**
-  - Completude e clareza
-  - Diagramas e modelagem
-  - Instruções de uso
-
-- **Funcionalidade (25%)**
-  - Requisitos atendidos
-  - Usabilidade
-  - Performance
-
-- **Processo (10%)**
-  - Versionamento
-  - CI/CD
-  - Colaboração
-
-### **🔍 Checklist de Revisão**
-
-- [ ] Estrutura de pastas seguida
-- [ ] README.md atualizado
-- [ ] Testes implementados
-- [ ] CI/CD configurado
-- [ ] Documentação completa
-- [ ] Código comentado
-- [ ] Segurança implementada
-- [ ] Performance otimizada
-
-## 🤝 Contribuindo
-
-Este template é mantido pela comunidade acadêmica. Para contribuir:
-
-1. **Fork** este repositório
-2. **Crie uma branch** para sua feature
-3. **Faça suas mudanças** seguindo os padrões
-4. **Abra um Pull Request** com descrição detalhada
-
-Veja o [Guia de Contribuição](CONTRIBUTING.md) para mais detalhes.
-
-## 📄 Licença
-
-Este template está licenciado sob a [Licença MIT](LICENSE) - veja o arquivo para detalhes.
-
-## 📞 Suporte
-
-- 📧 **Email**: [suporte@instituicao.edu.br]
-- 💬 **Issues**: Use as issues do GitHub
-- 📚 **Wiki**: [Link para wiki institucional]
-- 🎓 **Tutoriais**: [Link para tutoriais em vídeo]
-
----
-
-## 🙏 Agradecimentos
-
-Este template foi desenvolvido com base em:
-
-- 🏢 **Padrões da indústria** de software
-- 🎓 **Experiência acadêmica** de anos de ensino
-- 👥 **Feedback da comunidade** estudantil
-- 📚 **Melhores práticas** de engenharia de software
-
----
-
-⭐ **Se este template foi útil, considere dar uma estrela no repositório!**
-
-**Versão**: 1.0.0  
-**Última atualização**: Janeiro 2024  
-**Compatibilidade**: Todos os níveis acadêmicos
+### **Backend: Google Colab (Linux VM + GPU T4)** 
+- **Linguagem: Python 3**
+- **API: FastAPI + Uvicorn + PyNgrok**
+- **IA & Visão Computacional:**
+- **TensorFlow Hub: Modelo MeTRAbs (Estimativa de Pose 3D Absoluta)**
+- **JAX: Processamento numérico acelerado**
+- **MuJoCo: Física e Cinemática Inversa**
+- **OpenCV: Manipulação de vídeo**
+- **Análise de Dados: Filtro de Kalman, Gait Transformer.**
