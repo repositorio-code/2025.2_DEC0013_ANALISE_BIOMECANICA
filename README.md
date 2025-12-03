@@ -1,9 +1,9 @@
 # Análise Biomecânica
-> 🎓 Aplicação de Análise Biomecânica Remota via Visão Computacional 
+> Aplicação de Análise Biomecânica Remota via Visão Computacional 
 > Solução híbrida Client-Server para processamento de marcha e cinemática utilizando Google Colab e Interface Desktop.
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-![Status](https://img.shields.io/badge/Status-Em_Desenvolvimento-yellow)
+![Status](https://img.shields.io/badge/Status-Finalizado-green)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-lightgrey)
 
 ## 📋 Visão Geral Sobre o Projeto
@@ -50,10 +50,6 @@ O sistema opera em uma arquitetura híbrida Cliente-Servidor via túnel HTTP seg
 └── 📄 README.md                # Documentação
 ```
 
-## Requisitos
-
-> Python >=3.10.0
-
 ## Configuração do Ambiente
 
 1. Preparação Inicial (Cliente)
@@ -72,30 +68,25 @@ bash: pip install pyqt5 requests undetected-chromedriver
 2. Configuração do Servidor (Colab)
 - Faça o upload do arquivo server.ipynb para o seu Google Drive.
 - Atualize a constante NOTEBOOK_URL no arquivo frontend/main.py com o link do seu notebook.
-- Importante: No notebook, configure seu NGROK_TOKEN e NGROK_DOMAIN (opcional) para garantir a conexão estável.
+- Importante: No notebook, configure seu túnel NGROK_TOKEN/NGROK_DOMAIN ou cloudfare para garantir a conexão estável.
 
-3. Executando a Análise
+3. Executar a Aplicação (opcional)
 ```bash
 python frontend/main.py
-
-# Clonar o repositório 2025.2_DEC0013_ANALISE_BIOMECANICA
-git clone https://github.com/repositorio-code/2025.2_DEC0013_ANALISE_BIOMECANICA.git
-
-cd 2025.2_DEC0013_ANALISE_BIOMECANICA
-
-# Instalar as dependências utilizando o requirements.txt
-pip install -r requirements.txt
-
-bash: pip install pyqt5 requests undetected-chromedriver
 ```
-    `bash: `
+
+4. Gerar Arquivo Executável .exe
+```bash
+python -m PyInstaller --noconsole --onefile --name="Biomech v1.0" frontend/main.py
+# Após finalizar o processo, o arquivo .exe estára pasta dist do mesmo diretório
+```
 
 ## Fluxo de Trabalho:
-1. Boot do Servidor: Na seção "0. Controle", clique em 🚀 LIGAR COLAB. O sistema abrirá um navegador, conectará ao Colab e executará as células.
-2. Conexão: Copie a URL gerada pelo ngrok (exibida no log do Colab ou terminal) e cole no campo "URL Estática Ngrok".
+1. Servidor: Clique em **LIGAR COLAB**. O sistema abrirá um navegador, conectará ao Colab e executará as células.
+2. Conexão: Copie a URL gerada pelo ngrok/cloudfare e cole no campo "URL".
 3. Upload: Selecione o vídeo (.mp4) e a articulação desejada (ex: Joelho).
-4. Processamento: Clique em INICIAR ANÁLISE. O sistema fará o upload, processará o vídeo e aguardará o retorno.
-5. Resultados: Ao finalizar, dê um duplo clique nos itens da lista para baixar os gráficos e vídeos gerados.
+4. Processamento: Clique em **INICIAR ANÁLISE**. O sistema fará o upload, processará o vídeo e aguardará o retorno.
+5. Resultados: Ao finalizar, clique em **BAIXAR ARQUIVOS GERADOS** para baixar os gráficos e vídeos gerados.
 
 ## 🛠️ Stack Tecnológica
 
@@ -115,3 +106,10 @@ bash: pip install pyqt5 requests undetected-chromedriver
 - **MuJoCo: Física e Cinemática Inversa**
 - **OpenCV: Manipulação de vídeo**
 - **Análise de Dados: Filtro de Kalman, Gait Transformer.**
+
+## Versão
+> **Versão**: 1.0.0
+
+## 🛠️ Autores
+> Rufino Sérgio Panzo, Graduando em Engenharia de Computação
+> Edgar Pereira, Graduando em Engenharia de Computação
