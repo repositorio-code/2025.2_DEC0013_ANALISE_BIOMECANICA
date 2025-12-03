@@ -1,9 +1,14 @@
 import time
 import os
+import sys
+import platform
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
+
+if sys.platform == "win32":
+    import winreg
 
 class GerenciadorColab:
     """
@@ -26,6 +31,38 @@ class GerenciadorColab:
         self.colab_url = colab_url
         self.modo_oculto = modo_oculto
         self.navegador = None
+
+    def _obter_versao_chrome_instalada(self):
+        """
+        Detecta a versão 'Major' do Chrome instalado no Windows via Registro.
+
+        Return:
+            int: número referente a versão do Chrome instalada (ex: 142) ou None se falhar.
+        """
+        if sys.platform != "win32":
+            return None # Lógica apenas para Windows por enquanto
+
+        caminhos_registro = [
+            (winreg.HKEY_CURRENT_USER, r"Software\Google\Chrome\BLBeacon"),
+            (winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\WOW6432Node\Google\Chrome\BLBeacon"),
+            (winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Google\Chrome\BLBeacon")
+        ]
+
+        for hkey, caminho in caminhos_registro:
+            try:
+                with winreg.OpenKey(hkey, caminho) as key:
+                    versao, _ = winreg.QueryValueEx(key, "version")
+                    if versao:
+                        # Pega apenas o primeiro número (ex: "142.0.7444" -> 142)
+                        major_version = int(versao.split('.')[0])
+                        print(f"Versão do Chrome detectada no sistema: {major_version}")
+                        return major_version
+            except WindowsError:
+                continue
+        
+        print("Não foi possível detectar a versão automaticamente. Usando padrão.")
+        return None
+
     
     def start_colab(self):
         """
@@ -61,7 +98,8 @@ class GerenciadorColab:
 
         try:
             print(f"Iniciando Navegador...")
-            self.navegador = uc.Chrome(options=opcoes, version_main=None)
+            versao_detectada = self._obter_versao_chrome_instalada()
+            self.navegador = uc.Chrome(options=opcoes, version_main=versao_detectada)
             self.navegador.get(self.colab_url)
 
             # --- VERIFICAÇÃO DE LOGIN ---

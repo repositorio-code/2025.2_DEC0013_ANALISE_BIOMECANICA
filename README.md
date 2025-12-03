@@ -4,7 +4,7 @@
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
 ![Status](https://img.shields.io/badge/Status-Finalizado-green)
-![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-lightgrey)
+![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey)
 
 ## 📋 Visão Geral Sobre o Projeto
 
@@ -77,7 +77,7 @@ python frontend/main.py
 
 4. Gerar Arquivo Executável .exe
 ```bash
-python -m PyInstaller --noconsole --onefile --name="Biomech v1.0" frontend/main.py
+python -m PyInstaller --noconsole --onefile --name="Biomech v1.0.0" frontend/main.py
 # Após finalizar o processo, o arquivo .exe estára pasta dist do mesmo diretório
 ```
 
