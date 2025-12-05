@@ -1,6 +1,6 @@
 # Análise Biomecânica
 > Aplicação de Análise Biomecânica Remota via Visão Computacional 
-> Solução híbrida Client-Server para processamento de marcha e cinemática utilizando Google Colab e Interface Desktop.
+> <br>Solução híbrida Client-Server para processamento de marcha e cinemática utilizando Google Colab e Interface Desktop.
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
 ![Status](https://img.shields.io/badge/Status-Finalizado-green)
@@ -38,6 +38,11 @@ Desenvolvemos uma arquitetura híbrida (**Desktop + Colab**):
 ## 🏗️ Arquitetura do Sistema
 
 O sistema opera em uma arquitetura híbrida Cliente-Servidor via túnel HTTP seguro (ngrok por padão).
+
+<img width="480" height="280" alt="image (1)" src="https://github.com/user-attachments/assets/dd0bfeb2-e0ad-4293-939c-f4487950c8a6" />
+
+## Estrutura do Código
+
 ```
 2025.2_DEC0013_ANALISE_BIOMECANICA/
 ├── 📁 backend/                 # Código do lado do Servidor (Nuvem)
@@ -81,7 +86,7 @@ python -m PyInstaller --noconsole --onefile --name="Biomech v1.0.0" frontend/mai
 # Após finalizar o processo, o arquivo .exe estára pasta dist do mesmo diretório
 ```
 ## Interface
-<img width="1004" height="740" alt="image" src="https://github.com/user-attachments/assets/486079b8-2c2c-4090-8b12-c9b29ccedce5" />
+<img width="600" height="500" alt="image" src="https://github.com/user-attachments/assets/486079b8-2c2c-4090-8b12-c9b29ccedce5" />
 
 ## Fluxo de Trabalho:
 1. Servidor: Clique em **LIGAR COLAB**. O sistema abrirá um navegador, conectará ao Colab e executará as células.
@@ -89,6 +94,24 @@ python -m PyInstaller --noconsole --onefile --name="Biomech v1.0.0" frontend/mai
 3. Upload: Selecione o vídeo (.mp4) e a articulação desejada (ex: Joelho).
 4. Processamento: Clique em **INICIAR ANÁLISE**. O sistema fará o upload, processará o vídeo e aguardará o retorno.
 5. Resultados: Ao finalizar, clique em **BAIXAR ARQUIVOS GERADOS** para baixar os gráficos e vídeos gerados.
+
+## API
+
+1. Verificar Status da API (Health Check)
+Verifica se o servidor está online e respondendo. Utilizado pela interface gráfica para validar a conexão antes de enviar arquivos.
+
+URL: /health
+
+Método: GET
+
+Exemplo de Resposta (200 OK):
+
+JSON
+
+{
+  "status": "online",
+  "message": "Servidor Biomech Operante"
+}
 
 ## 🛠️ Stack Tecnológica
 
@@ -114,4 +137,4 @@ python -m PyInstaller --noconsole --onefile --name="Biomech v1.0.0" frontend/mai
 
 ## 🛠️ Autores
 > Rufino Sérgio Panzo, Graduando em Engenharia de Computação
-> Edgar Pereira, Graduando em Engenharia de Computação
+> <br>Edgar Pereira, Graduando em Engenharia de Computação
