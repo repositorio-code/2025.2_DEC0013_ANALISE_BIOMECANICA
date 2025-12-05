@@ -1,218 +1,54 @@
-# Análise Biomecânica
-> Aplicação de Análise Biomecânica Remota via Visão Computacional 
-> <br>Solução híbrida Client-Server para processamento de marcha e cinemática utilizando Google Colab e Interface Desktop.
+# Interface Desktop de Análise Biomecânica 🏃‍♂️📊
 
+![Status do Projeto](https://img.shields.io/badge/Status-Em_Desenvolvimento-yellow)
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-![Status](https://img.shields.io/badge/Status-Finalizado-green)
-![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey)
+![PyQt5](https://img.shields.io/badge/GUI-PyQt5-green)
 
-## 📋 Visão Geral Sobre o Projeto
+Uma aplicação desktop desenvolvida em Python (PyQt5) que atua como **frontend** para um sistema de análise biomecânica baseada em IA. O sistema orquestra a execução remota no **Google Colab**, gerencia o upload de vídeos, monitora o progresso da análise e visualiza os resultados processados.
 
-Este projeto foi desenvolvido no contexto acadêmico de Engenharia de Computação (UFSC) na disciplina de **Projeto Integrador I**. Consiste em uma **aplicação desktop (GUI)** que atua como *frontend* para um notebook de análise biomecânica de alto desempenho hospedado no **Google Colab**. 
+## 📋 Funcionalidades
 
-O objetivo é democratizar o acesso a algoritmos avançados de visão computacional e biomecânica, encapsulando a complexidade do código Python em uma interface amigável, permitindo que usuários com computadores modestos utilizem o poder de processamento (GPUs) do Google Colab. A comunicação é realizada via API REST, utilizando um túnel de conexão para ligar a máquina local ao ambiente de nuvem. usuários com computadores modestos utilizem o poder de processamento (GPUs) do Google Colab.
+* **Automação de Boot (Colab):** Inicia automaticamente o notebook do Google Colab via Selenium (Modo Headless ou Interface Gráfica).
+* **Conexão via API:** Conecta-se ao backend (geralmente tunelado via Ngrok) para envio de comandos.
+* **Configuração de Análise:** Permite seleção de vídeo local e escolha da articulação alvo (Joelho, Quadril, Tornozelo, etc.).
+* **Monitoramento em Tempo Real:** Barra de progresso e logs de sistema sincronizados com o status do servidor.
+* **Galeria de Resultados:** Visualizador de imagens integrado (Carrossel) para inspecionar os gráficos gerados antes de baixar.
+* **Exportação:** Download automático dos resultados completos em formato `.zip`.
 
-## 🎯 O Problema
+## 🛠️ Pré-requisitos
 
-Notebooks Python (Jupyter/Colab) são ferramentas excelentes para desenvolvimento e pesquisa, mas apresentam uma **alta barreira de entrada** para usuários finais, como fisioterapeutas e profissionais de educação física.
+Para executar este projeto, você precisará de:
 
-A necessidade de rodar células de código, configurar ambientes e gerenciar dependências torna o uso prático inviável em um ambiente clínico.
+* **Python 3.8** ou superior.
+* Navegador **Google Chrome** instalado (para a automação do Colab).
+* Bibliotecas Python listadas abaixo.
 
-## 🚀 A Solução
 
-Desenvolvemos uma arquitetura híbrida (**Desktop + Colab**):
-1.  **Backend (Google Colab):** Onde ocorre o processamento pesado (Machine Learning/Visão Computacional). O notebook expõe endpoints via API.
-2.  **Túnel (Ngrok/Cloudflared):** Expõe a porta do Colab para a internet segura.
-3.  **Frontend (Desktop App):** Uma aplicação executável (.exe) onde o usuário carrega vídeos, clica em "Analisar" e visualiza os relatórios.
+## 🚀 Como Usar
+Execute o arquivo principal da interface:
 
-> **Resultado:** O profissional tem o poder da nuvem com a simplicidade de um software nativo.
-
-## 🎯 Funcionalidades Principais
-
-- ✅ Processamento em Nuvem: Executa algoritmos pesados (MeTRAbs, JAX, MuJoCo) em GPUs T4 no Google Colab.
-- ✅ Cliente Desktop Amigável: Interface local em PyQt5 para gerenciamento de tarefas.
-- ✅ Automação Total: Script Selenium (undetected-chromedriver) que liga e configura o servidor Colab automaticamente.
-- ✅ Análise Flexível: Seleção dinâmica de articulações (Joelho, Quadril, Tornozelo, Membros Superiores).
-- ✅ Relatórios Completos: Gera gráficos de ângulos, fases da marcha, erro de Kalman e vídeo com overlay do esqueleto.
-
-## 🏗️ Arquitetura do Sistema
-
-O sistema opera em uma arquitetura híbrida Cliente-Servidor via túnel HTTP seguro (ngrok por padão).
-
-<img width="480" height="280" alt="image (1)" src="https://github.com/user-attachments/assets/dd0bfeb2-e0ad-4293-939c-f4487950c8a6" />
-
-## Estrutura do Código
-
-```
-2025.2_DEC0013_ANALISE_BIOMECANICA/
-├── 📁 backend/                 # Código do lado do Servidor (Nuvem)
-│   └── 📄 server.ipynb         # Notebook Colab (FastAPI + AI Models)
-├── 📁 frontend/                # Aplicação Desktop (Local)
-│   ├── 📄 main.py              # Interface Gráfica (PyQt5)
-├── 📁 script/                  # Código do lado do Servidor (Nuvem)
-│   ├── 📄 colab_manager.py     # Automação do Browser (Selenium)
-├── 📄 requirements.txt         # Dependências locais
-└── 📄 README.md                # Documentação
-```
-
-## Configuração do Ambiente
-
-1. Preparação Inicial (Cliente)
 ```bash
-# Clonar o repositório 2025.2_DEC0013_ANALISE_BIOMECANICA
-git clone https://github.com/repositorio-code/2025.2_DEC0013_ANALISE_BIOMECANICA.git
-
-cd 2025.2_DEC0013_ANALISE_BIOMECANICA
-
-# Instalar as dependências utilizando o requirements.txt
-pip install -r requirements.txt
-
-bash: pip install pyqt5 requests undetected-chromedriver
+python app.py
 ```
+  
+Passo a Passo na Interface:<br>
+0. Servidor Remoto:
+  - Clique em "LIGAR O COLAB". O sistema usará o Selenium para abrir o notebook definido e conectar ao runtime.
+  - Nota: Selecione "Modo Login" se precisar inserir credenciais do Google manualmente.
+<br>1. Conexão API:
+  - Insira a URL gerada pelo Ngrok (exibida no notebook do Colab após a execução).
+  - Clique em "Testar". A luz deve ficar Verde.
 
-2. Configuração do Servidor (Colab)
-- Faça o upload do arquivo server.ipynb para o seu Google Drive.
-- Atualize a constante NOTEBOOK_URL no arquivo frontend/main.py com o link do seu notebook.
-- Importante: No notebook, configure seu túnel NGROK_TOKEN/NGROK_DOMAIN ou cloudfare para garantir a conexão estável.
+2. Configuração:
+  - Clique em "Selecionar Vídeo" e escolha seu arquivo .mp4.
+  - Selecione a articulação desejada no menu (ex: "Joelho").
 
-3. Executar a Aplicação (opcional)
-```bash
-python frontend/main.py
-```
+3. Controle:
+  - Clique em "INICIAR ANÁLISE".
+  - Acompanhe o progresso na barra inferior e na aba "Logs do Sistema".
 
-4. Gerar Arquivo Executável .exe
-```bash
-python -m PyInstaller --noconsole --onefile --name="Biomech v1.0.0" frontend/main.py
-# Após finalizar o processo, o arquivo .exe estára pasta dist do mesmo diretório
-```
-## Interface
-<img width="600" height="500" alt="image" src="https://github.com/user-attachments/assets/486079b8-2c2c-4090-8b12-c9b29ccedce5" />
+Visualização e Download:
+  - Ao finalizar, as imagens de prévia aparecerão na aba "Galeria / Gráficos".
+  - Clique em "BAIXAR ARQUIVOS GERADOS (ZIP)" para salvar o relatório completo.
 
-## Fluxo de Trabalho:
-1. Servidor: Clique em **LIGAR COLAB**. O sistema abrirá um navegador, conectará ao Colab e executará as células.
-2. Conexão: Copie a URL gerada pelo ngrok/cloudfare e cole no campo "URL".
-3. Upload: Selecione o vídeo (.mp4) e a articulação desejada (ex: Joelho).
-4. Processamento: Clique em **INICIAR ANÁLISE**. O sistema fará o upload, processará o vídeo e aguardará o retorno.
-5. Resultados: Ao finalizar, clique em **BAIXAR ARQUIVOS GERADOS** para baixar os gráficos e vídeos gerados.
-
-## API
-
-> 1. **Verificar Status da API**: Verifica se o servidor está online e respondendo. Utilizado pela interface gráfica para validar a conexão antes de enviar arquivos.
-
-```
-  URL: /health
-  Método: GET
-
-  Exemplo de Resposta (200 OK):
-  JSON
-  {
-    "status": "online",
-    "message": "Servidor Biomech Operante"
-  }
-```
-
-> 2. **Processar Vídeo**: Envia um arquivo de vídeo para análise e inicia o processamento assíncrono em background.
-
-```
-  URL: /processar
-  Método: POST
-  Content-Type: multipart/form-data
-  Parâmetros do Corpo (Form Data):
-    - file(File): Arquivo de vídeo (.mp4, .avi, etc);
-    - joint_selection (String): NãoArticulação a ser analisada (Padrão: "Joelho").
-
-  Exemplo de Resposta (200 OK):
-  JSON
-  {
-    "message": "Iniciado",
-    "job_id": "a1b2c3d4-e5f6-7890-1234-56789abcdef0"
-  }
-```
-
-> 3. **Consultar Status do Job**: Verifica o progresso atual de um processamento específico.
-
-```
-  URL: /status/{job_id}
-  Método: GET
-  Content-Type: multipart/form-data
-  Parâmetros de Rota:
-    - job_id: O UUID retornado no endpoint /processar.
-
-  Exemplo de Resposta (Em andamento):
-  JSON
-  {
-    "status": "processando",
-    "progress": 45,
-    "resultados": null
-  }
-
-  Exemplo de Resposta (Concluído):
-  JSON
-    {
-      "status": "concluido",
-      "progress": 100,
-      "zip_file": "analise_final.zip",
-      "resultados": ["grafico_joelho.png", "video_overlay.mp4"]
-    }
-```
-
-> 4. **Cancelar Job**: Solicita a interrupção de um processamento em andamento.
-
-```
-  URL: /cancelar/{job_id}
-  Método: POST
-  Content-Type: multipart/form-data
-  Parâmetros de Rota:
-    - job_id: O UUID do job a ser cancelado.
-
-  Exemplo de Resposta:
-  JSON
-  {
-    "message": "Sinal de cancelamento enviado."
-  }
-```
-
-> 5. **Baixar Pacote Completo (ZIP)**: Faz o download de todos os resultados gerados compactados.
-
-```
-  URL: /download-zip/{job_id}
-  Método: GET
-  Resposta: Arquivo binário (application/zip).
-```
-
-> 6. **Baixar Arquivo Individual**: Permite visualizar ou baixar um arquivo específico (como uma imagem de gráfico) gerado pelo processamento.
-
-```
-  URL: /resultados/{job_id}/{nome_arquivo}
-  Método: GET
-  Parâmetros de Rota:
-    - job_id: ID do processamento.
-    - nome_arquivo: Nome do arquivo desejado (ex: grafico_angulo.png).
-  Resposta: Arquivo binário (imagem, vídeo, etc).
-```
-
-## 🛠️ Stack Tecnológica
-
-### **Frontend**
-- **Linguagem: Python 3**
-- **GUI: PyQt5 (Widgets, Threading, Signals)**
-- **Automação: Selenium (Undetected Chromedriver)**
-- **Comunicação: Requests (HTTP REST)**
-- **Backend (Servidor Remoto)**
-
-### **Backend: Google Colab (Linux VM + GPU T4)** 
-- **Linguagem: Python 3**
-- **API: FastAPI + Uvicorn + PyNgrok**
-- **IA & Visão Computacional:**
-- **TensorFlow Hub: Modelo MeTRAbs (Estimativa de Pose 3D Absoluta)**
-- **JAX: Processamento numérico acelerado**
-- **MuJoCo: Física e Cinemática Inversa**
-- **OpenCV: Manipulação de vídeo**
-- **Análise de Dados: Filtro de Kalman, Gait Transformer.**
-
-## Versão
-> **Versão**: 1.0.0
-
-## 🛠️ Autores
-> Rufino Sérgio Panzo, Graduando em Engenharia de Computação
-> <br>Edgar Pereira, Graduando em Engenharia de Computação
+enharia de Computação
