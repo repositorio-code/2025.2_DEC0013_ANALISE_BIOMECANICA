@@ -97,21 +97,35 @@ python -m PyInstaller --noconsole --onefile --name="Biomech v1.0.0" frontend/mai
 
 ## API
 
-1. Verificar Status da API (Health Check)
-Verifica se o servidor está online e respondendo. Utilizado pela interface gráfica para validar a conexão antes de enviar arquivos.
+> 1. **Verificar Status da API**: Verifica se o servidor está online e respondendo. Utilizado pela interface gráfica para validar a conexão antes de enviar arquivos.
 
-URL: /health
+```
+  URL: /health
+  Método: GET
+  Exemplo de Resposta (200 OK):
+  JSON
+  {
+    "status": "online",
+    "message": "Servidor Biomech Operante"
+  }
+```
 
-Método: GET
+> 2. **Processar Vídeo**: Envia um arquivo de vídeo para análise e inicia o processamento assíncrono em background.
 
-Exemplo de Resposta (200 OK):
-
-JSON
-
-{
-  "status": "online",
-  "message": "Servidor Biomech Operante"
-}
+```
+  URL: /processar
+  Método: POST
+  Content-Type: multipart/form-data
+  Parâmetros do Corpo (Form Data):
+    - file(File): Arquivo de vídeo (.mp4, .avi, etc);
+    - joint_selection (String): NãoArticulação a ser analisada (Padrão: "Joelho").
+  Exemplo de Resposta (200 OK):
+  JSON
+  {
+    "message": "Iniciado",
+    "job_id": "a1b2c3d4-e5f6-7890-1234-56789abcdef0"
+  }
+```
 
 ## 🛠️ Stack Tecnológica
 
