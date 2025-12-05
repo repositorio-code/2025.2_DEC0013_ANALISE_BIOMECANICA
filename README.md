@@ -102,6 +102,7 @@ python -m PyInstaller --noconsole --onefile --name="Biomech v1.0.0" frontend/mai
 ```
   URL: /health
   Método: GET
+
   Exemplo de Resposta (200 OK):
   JSON
   {
@@ -119,12 +120,75 @@ python -m PyInstaller --noconsole --onefile --name="Biomech v1.0.0" frontend/mai
   Parâmetros do Corpo (Form Data):
     - file(File): Arquivo de vídeo (.mp4, .avi, etc);
     - joint_selection (String): NãoArticulação a ser analisada (Padrão: "Joelho").
+
   Exemplo de Resposta (200 OK):
   JSON
   {
     "message": "Iniciado",
     "job_id": "a1b2c3d4-e5f6-7890-1234-56789abcdef0"
   }
+```
+
+> 3. **Consultar Status do Job**: Verifica o progresso atual de um processamento específico.
+
+```
+  URL: /status/{job_id}
+  Método: GET
+  Content-Type: multipart/form-data
+  Parâmetros de Rota:
+    - job_id: O UUID retornado no endpoint /processar.
+
+  Exemplo de Resposta (Em andamento):
+  JSON
+  {
+    "status": "processando",
+    "progress": 45,
+    "resultados": null
+  }
+
+  Exemplo de Resposta (Concluído):
+  JSON
+    {
+      "status": "concluido",
+      "progress": 100,
+      "zip_file": "analise_final.zip",
+      "resultados": ["grafico_joelho.png", "video_overlay.mp4"]
+    }
+```
+
+> 4. **Cancelar Job**: Solicita a interrupção de um processamento em andamento.
+
+```
+  URL: /cancelar/{job_id}
+  Método: POST
+  Content-Type: multipart/form-data
+  Parâmetros de Rota:
+    - job_id: O UUID do job a ser cancelado.
+
+  Exemplo de Resposta:
+  JSON
+  {
+    "message": "Sinal de cancelamento enviado."
+  }
+```
+
+> 5. **Baixar Pacote Completo (ZIP)**: Faz o download de todos os resultados gerados compactados.
+
+```
+  URL: /download-zip/{job_id}
+  Método: GET
+  Resposta: Arquivo binário (application/zip).
+```
+
+> 6. **Baixar Arquivo Individual**: Permite visualizar ou baixar um arquivo específico (como uma imagem de gráfico) gerado pelo processamento.
+
+```
+  URL: /resultados/{job_id}/{nome_arquivo}
+  Método: GET
+  Parâmetros de Rota:
+    - job_id: ID do processamento.
+    - nome_arquivo: Nome do arquivo desejado (ex: grafico_angulo.png).
+  Resposta: Arquivo binário (imagem, vídeo, etc).
 ```
 
 ## 🛠️ Stack Tecnológica
