@@ -80,6 +80,8 @@ python frontend/main.py
 python -m PyInstaller --noconsole --onefile --name="Biomech v1.0.0" frontend/main.py
 # Após finalizar o processo, o arquivo .exe estára pasta dist do mesmo diretório
 ```
+## Interface
+<img width="1004" height="740" alt="image" src="https://github.com/user-attachments/assets/486079b8-2c2c-4090-8b12-c9b29ccedce5" />
 
 ## Fluxo de Trabalho:
 1. Servidor: Clique em **LIGAR COLAB**. O sistema abrirá um navegador, conectará ao Colab e executará as células.
