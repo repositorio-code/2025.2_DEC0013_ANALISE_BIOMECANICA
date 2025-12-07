@@ -6,7 +6,7 @@
 
 Uma aplicação desktop desenvolvida em Python (PyQt5) que atua como **frontend** para um sistema de análise biomecânica baseada em IA. A aplicação serve como a interface de controle para o usuário, permitindo execução remota no **Google Colab**, o upload de vídeos, configuração da análise e visualização dos resultados processados na nuvem.
 
-## 📋 Funcionalidades
+## Funcionalidades
 
 * **Automação de Browser:** Utiliza `undetected-chromedriver` (Selenium) para realizar login e interagir com o Google Colab automaticamente, sem que o usuário precise manipular o notebook manualmente.
 * **Conexão via API:** Conecta-se ao backend (geralmente tunelado via Ngrok/Cloudflare) para envio de vídeos e configurações para o servidor via requisições HTTP (`requests`) e recebe os JSONs de resposta.
@@ -15,7 +15,7 @@ Uma aplicação desktop desenvolvida em Python (PyQt5) que atua como **frontend*
 * **Galeria de Resultados:** Visualizador de imagens integrado (Carrossel) para inspecionar os gráficos gerados antes de baixar.
 * **Exportação:** Download automático dos resultados completos em formato `.zip`.
 
-## 🛠️ Pré-requisitos
+## Pré-requisitos
 
 Para executar este projeto, você precisará de:
 
@@ -27,7 +27,7 @@ Para executar este projeto, você precisará de:
   - `undetected-chromedriver`: Para automação do navegador (bypass de detecção de bot do Google).
 
 
-## 🚀 Como Usar
+## Como Usar
 
 ### Como Executar a Aplicação
 Certifique-se de estar na raiz do projeto antes de rodar o comando:
