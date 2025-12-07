@@ -88,12 +88,43 @@ python -m PyInstaller --noconsole --onefile --name="Biomech v1.0.0" frontend/app
 ## Interface
 <img width="600" height="500" alt="image" src="https://github.com/user-attachments/assets/486079b8-2c2c-4090-8b12-c9b29ccedce5" />
 
-## Fluxo de Trabalho:
-1. Servidor: Clique em **LIGAR COLAB**. O sistema abrirá um navegador, conectará ao Colab e executará as células.
-2. Conexão: Copie a URL gerada pelo túnel (exibida no final da execução do notebook) ngrok/cloudfare e cole no campo "URL".
-3. Upload: Selecione o vídeo (.mp4) e a articulação desejada (ex: Joelho).
-4. Processamento: Clique em **INICIAR ANÁLISE**. O sistema fará o upload, processará o vídeo e aguardará o retorno.
-5. Resultados: Ao finalizar, clique em **BAIXAR ARQUIVOS GERADOS** para baixar os gráficos e vídeos gerados.
+## Fluxo de Trabalho
+
+**1. Inicialização do Servidor (Colab)**
+- Clique no botão **LIGAR COLAB**. O sistema abrirá o navegador automaticamente via Selenium.
+- **Primeiro Acesso:** Será necessário fazer o login na sua conta Google manualmente. O sistema aguardará você completar essa etapa.
+- **Acessos Seguintes:** O login será feito automaticamente (sessão persistente).
+- O script executará as células e gerará a URL do túnel.
+
+**2. Estabelecendo Conexão**
+- Copie a URL gerada no final do notebook (ex: `https://xxxx.ngrok-free.app`).
+- Cole no campo **"URL do Servidor"** na interface desktop.
+- Clique em **TESTAR**.
+    - 🔴 **Status Vermelho:** Desconectado.
+    - 🟢 **Status Verde:** Conexão estabelecida com sucesso!
+
+**3. Configuração da Análise**
+- Clique em **Selecionar Vídeo** para carregar seu arquivo `.mp4`.
+- Escolha a articulação alvo no menu suspenso (ex: *Joelho, Quadril*).
+
+**4. Processamento**
+- Clique em **INICIAR ANÁLISE**.
+- A barra de progresso indicará o envio, processamento na GPU remota e recebimento dos dados.
+
+**5. Resultados**
+- Assim que o processamento finalizar, clique em **BAIXAR ARQUIVOS GERADOS**.
+- Um arquivo `.zip` contendo os gráficos, o vídeo com esqueleto (overlay) e os relatórios será salvo.
+   
+## Exemplos de Gráficos Gerados
+
+<img width="500" height="250" alt="a03564d4-e435-4f8c-9cd0-d5e339f2953d_asb_walk_01_frame_inicial" src="https://github.com/user-attachments/assets/39dd4f6c-fcf8-4bb6-be07-b112870aa1a6" />
+<img width="500" height="250" alt="a03564d4-e435-4f8c-9cd0-d5e339f2953d_asb_walk_02_visualizacao_esqueleto" src="https://github.com/user-attachments/assets/d5407512-789c-459d-8e7d-e20fa239a3e0" />
+<img width="500" height="250" alt="a03564d4-e435-4f8c-9cd0-d5e339f2953d_asb_walk_03_angulo_joelho" src="https://github.com/user-attachments/assets/ed4e059e-15c3-4149-84b5-39075071d03a" />
+<img width="500" height="250" alt="a03564d4-e435-4f8c-9cd0-d5e339f2953d_asb_walk_04_fase_marcha" src="https://github.com/user-attachments/assets/b56a1bbc-a72d-4ff6-8fa8-3e2ead8f9931" />
+<img width="500" height="250" alt="a03564d4-e435-4f8c-9cd0-d5e339f2953d_asb_walk_05_erro_kalman" src="https://github.com/user-attachments/assets/a00bd108-7085-4d3c-a86c-7e3948f901fa" />
+<img width="500" height="250" alt="a03564d4-e435-4f8c-9cd0-d5e339f2953d_asb_walk_06_estado_kalman" src="https://github.com/user-attachments/assets/8e6f85e7-79a1-4957-aa58-ec3558da1d8c" />
+
+
 
 ## Stack Tecnológica
 
