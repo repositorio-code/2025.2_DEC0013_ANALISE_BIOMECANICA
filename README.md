@@ -6,19 +6,19 @@
 ![Status](https://img.shields.io/badge/Status-Finalizado-green)
 ![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey)
 
-## 📋 Visão Geral Sobre o Projeto
+## Visão Geral Sobre o Projeto
 
 Este projeto foi desenvolvido no contexto acadêmico de Engenharia de Computação (UFSC) na disciplina de **Projeto Integrador I**. Consiste em uma **aplicação desktop (GUI)** que atua como *frontend* para um notebook de análise biomecânica de alto desempenho hospedado no **Google Colab**. 
 
 O objetivo é democratizar o acesso a algoritmos avançados de visão computacional e biomecânica, encapsulando a complexidade do código Python em uma interface amigável, permitindo que usuários com computadores modestos utilizem o poder de processamento (GPUs) do Google Colab. A comunicação é realizada via API REST, utilizando um túnel de conexão para ligar a máquina local ao ambiente de nuvem.
 
-## 🎯 O Problema
+## O Problema
 
 Notebooks Python (Jupyter/Colab) são ferramentas excelentes para desenvolvimento e pesquisa, mas apresentam uma **alta barreira de entrada** para usuários finais, como fisioterapeutas e profissionais de educação física.
 
 A necessidade de rodar células de código, configurar ambientes e gerenciar dependências torna o uso prático inviável em um ambiente clínico.
 
-## 🚀 A Solução
+## A Solução
 
 Desenvolvemos uma arquitetura híbrida (**Desktop + Colab**):
 1.  **Backend (Google Colab):** Onde ocorre o processamento pesado (Machine Learning/Visão Computacional). O notebook expõe endpoints via API.
@@ -27,7 +27,7 @@ Desenvolvemos uma arquitetura híbrida (**Desktop + Colab**):
 
 > **Resultado:** O profissional tem o poder da nuvem com a simplicidade de um software nativo.
 
-## 🎯 Funcionalidades Principais
+## Funcionalidades Principais
 
 - ✅ Processamento em Nuvem: Executa algoritmos pesados (MeTRAbs, JAX, MuJoCo) em GPUs T4 no Google Colab.
 - ✅ Cliente Desktop Amigável: Interface local em PyQt5 para gerenciamento de tarefas.
@@ -35,7 +35,7 @@ Desenvolvemos uma arquitetura híbrida (**Desktop + Colab**):
 - ✅ Análise Flexível: Seleção dinâmica de articulações (Joelho, Quadril, Tornozelo, Membros Superiores).
 - ✅ Relatórios Completos: Gera gráficos de ângulos, fases da marcha, erro de Kalman e vídeo com overlay do esqueleto.
 
-## 🏗️ Arquitetura do Sistema
+## Arquitetura do Sistema
 
 O sistema opera em uma arquitetura híbrida Cliente-Servidor via túnel HTTP seguro (ngrok por padão).
 
@@ -95,7 +95,7 @@ python -m PyInstaller --noconsole --onefile --name="Biomech v1.0.0" frontend/app
 4. Processamento: Clique em **INICIAR ANÁLISE**. O sistema fará o upload, processará o vídeo e aguardará o retorno.
 5. Resultados: Ao finalizar, clique em **BAIXAR ARQUIVOS GERADOS** para baixar os gráficos e vídeos gerados.
 
-## 🛠️ Stack Tecnológica
+## Stack Tecnológica
 
 ### **Frontend**
 - **Linguagem: Python 3**
@@ -117,6 +117,6 @@ python -m PyInstaller --noconsole --onefile --name="Biomech v1.0.0" frontend/app
 ## Versão
 > **Versão**: 1.0.0
 
-## 🛠️ Autores
+## Autores
 > **Rufino Sérgio Panzo** - Graduando em Engenharia de Computação
 > <br>**Edgar Pereira** - Graduando em Engenharia de Computação
