@@ -3,7 +3,7 @@ Este repositório contém o código do **Backend** da aplicação de Análise Bi
 
 O servidor expõe uma API REST via **FastAPI**, acessível externamente através de um túnel **Ngrok**.
 
-## ⚙️ Arquitetura
+## Arquitetura
 
 O backend opera em uma arquitetura híbrida:
 
@@ -13,7 +13,7 @@ O backend opera em uma arquitetura híbrida:
 3.  **MeTRAbs (Metric-Scale Truncation-Robust Heatmaps):** Modelo responsável pela estimativa de pose 3D absoluta a partir de imagens 2D.
 4.  **JAX & MuJoCo:** Utilizados para cálculos de cinemática inversa e dinâmica multicorpos, garantindo consistência física aos movimentos detectados.
 
-## 🚀 Como Executar
+## Como Executar
 
 Este backend reside inteiramente no arquivo `server.ipynb`.
 1.  Abra o arquivo `server.ipynb` no **Google Colab**.
@@ -119,14 +119,3 @@ Este backend reside inteiramente no arquivo `server.ipynb`.
     - nome_arquivo: Nome do arquivo desejado (ex: grafico_angulo.png).
   Resposta: Arquivo binário (imagem, vídeo, etc).
 ```
-
-## 🛠️ Tecnologias e Bibliotecas
-
-As principais dependências instaladas na Célula 1 incluem:
-
-* **FastAPI & Uvicorn:** Servidor Web Assíncrono.
-* **TensorFlow & TensorFlow Hub:** Carregamento do modelo MeTRAbs.
-* **JAX & Equinox:** Computação numérica de alta performance para cinemática inversa.
-* **MuJoCo:** Motor de física para validação biomecânica.
-* **OpenCV (cv2):** Manipulação de vídeo.
-* **PyNgrok:** Tunelamento de rede.
