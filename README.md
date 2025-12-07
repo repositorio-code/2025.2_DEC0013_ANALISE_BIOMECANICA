@@ -10,7 +10,7 @@
 
 Este projeto foi desenvolvido no contexto acadêmico de Engenharia de Computação (UFSC) na disciplina de **Projeto Integrador I**. Consiste em uma **aplicação desktop (GUI)** que atua como *frontend* para um notebook de análise biomecânica de alto desempenho hospedado no **Google Colab**. 
 
-O objetivo é democratizar o acesso a algoritmos avançados de visão computacional e biomecânica, encapsulando a complexidade do código Python em uma interface amigável, permitindo que usuários com computadores modestos utilizem o poder de processamento (GPUs) do Google Colab. A comunicação é realizada via API REST, utilizando um túnel de conexão para ligar a máquina local ao ambiente de nuvem. usuários com computadores modestos utilizem o poder de processamento (GPUs) do Google Colab.
+O objetivo é democratizar o acesso a algoritmos avançados de visão computacional e biomecânica, encapsulando a complexidade do código Python em uma interface amigável, permitindo que usuários com computadores modestos utilizem o poder de processamento (GPUs) do Google Colab. A comunicação é realizada via API REST, utilizando um túnel de conexão para ligar a máquina local ao ambiente de nuvem.
 
 ## 🎯 O Problema
 
@@ -22,7 +22,7 @@ A necessidade de rodar células de código, configurar ambientes e gerenciar dep
 
 Desenvolvemos uma arquitetura híbrida (**Desktop + Colab**):
 1.  **Backend (Google Colab):** Onde ocorre o processamento pesado (Machine Learning/Visão Computacional). O notebook expõe endpoints via API.
-2.  **Túnel (Ngrok/Cloudflared):** Expõe a porta do Colab para a internet segura.
+2.  **Túnel (Ngrok/Cloudflare):** Expõe a porta do Colab para a internet segura.
 3.  **Frontend (Desktop App):** Uma aplicação executável (.exe) onde o usuário carrega vídeos, clica em "Analisar" e visualiza os relatórios.
 
 > **Resultado:** O profissional tem o poder da nuvem com a simplicidade de um software nativo.
@@ -41,33 +41,33 @@ O sistema opera em uma arquitetura híbrida Cliente-Servidor via túnel HTTP seg
 
 <img width="480" height="280" alt="image (1)" src="https://github.com/user-attachments/assets/dd0bfeb2-e0ad-4293-939c-f4487950c8a6" />
 
-## Estrutura do Código
+## Estrutura do Diretório
 
 ```
 2025.2_DEC0013_ANALISE_BIOMECANICA/
-├── 📁 backend/                 # Código do lado do Servidor (Nuvem)
-│   └── 📄 server.ipynb         # Notebook Colab (FastAPI + AI Models)
-├── 📁 frontend/                # Aplicação Desktop (Local)
-│   ├── 📄 main.py              # Interface Gráfica (PyQt5)
-├── 📁 script/                  # Código do lado do Servidor (Nuvem)
-│   ├── 📄 colab_manager.py     # Automação do Browser (Selenium)
+├── 📁 backend/                  # Código do lado do Servidor (Nuvem)
+│   ├── 📄 server.ipynb          # Notebook Colab (FastAPI + AI Models)
+│   └── 📄 README.md             # Documentação do Backend
+├── 📁 frontend/                 # Aplicação Desktop (Local)
+│   ├── 📄 app.py                # Interface Gráfica (PyQt5)
+│   └── 📄 README.md             # Documentação do Frontend
+├── 📁 script/                  # Automação Local
+│   └── 📄 colab_manager.py     # Automação do Browser (Selenium)
 ├── 📄 requirements.txt         # Dependências locais
-└── 📄 README.md                # Documentação
+└── 📄 README.md                # Documentação Geral do Projeto
 ```
 
 ## Configuração do Ambiente
 
 1. Preparação Inicial (Cliente)
 ```bash
-# Clonar o repositório 2025.2_DEC0013_ANALISE_BIOMECANICA
+# Clonar o repositório
 git clone https://github.com/repositorio-code/2025.2_DEC0013_ANALISE_BIOMECANICA.git
 
 cd 2025.2_DEC0013_ANALISE_BIOMECANICA
 
-# Instalar as dependências utilizando o requirements.txt
+# Instalar as dependências
 pip install -r requirements.txt
-
-bash: pip install pyqt5 requests undetected-chromedriver
 ```
 
 2. Configuração do Servidor (Colab)
@@ -77,12 +77,12 @@ bash: pip install pyqt5 requests undetected-chromedriver
 
 3. Executar a Aplicação (opcional)
 ```bash
-python frontend/main.py
+python frontend/app.py
 ```
 
-4. Gerar Arquivo Executável .exe
+4. Gerar Arquivo Executável (.exe)
 ```bash
-python -m PyInstaller --noconsole --onefile --name="Biomech v1.0.0" frontend/main.py
+python -m PyInstaller --noconsole --onefile --name="Biomech v1.0.0" frontend/app.py
 # Após finalizar o processo, o arquivo .exe estára pasta dist do mesmo diretório
 ```
 ## Interface
@@ -90,7 +90,7 @@ python -m PyInstaller --noconsole --onefile --name="Biomech v1.0.0" frontend/mai
 
 ## Fluxo de Trabalho:
 1. Servidor: Clique em **LIGAR COLAB**. O sistema abrirá um navegador, conectará ao Colab e executará as células.
-2. Conexão: Copie a URL gerada pelo ngrok/cloudfare e cole no campo "URL".
+2. Conexão: Copie a URL gerada pelo túnel (exibida no final da execução do notebook) ngrok/cloudfare e cole no campo "URL".
 3. Upload: Selecione o vídeo (.mp4) e a articulação desejada (ex: Joelho).
 4. Processamento: Clique em **INICIAR ANÁLISE**. O sistema fará o upload, processará o vídeo e aguardará o retorno.
 5. Resultados: Ao finalizar, clique em **BAIXAR ARQUIVOS GERADOS** para baixar os gráficos e vídeos gerados.
@@ -108,15 +108,15 @@ python -m PyInstaller --noconsole --onefile --name="Biomech v1.0.0" frontend/mai
 - **Linguagem: Python 3**
 - **API: FastAPI + Uvicorn + PyNgrok**
 - **IA & Visão Computacional:**
-- **TensorFlow Hub: Modelo MeTRAbs (Estimativa de Pose 3D Absoluta)**
-- **JAX: Processamento numérico acelerado**
-- **MuJoCo: Física e Cinemática Inversa**
-- **OpenCV: Manipulação de vídeo**
+  - **TensorFlow Hub: Modelo MeTRAbs (Estimativa de Pose 3D Absoluta)**
+  - **JAX: Processamento numérico acelerado**
+  - **MuJoCo: Física e Cinemática Inversa**
+  - **OpenCV: Manipulação de vídeo**
 - **Análise de Dados: Filtro de Kalman, Gait Transformer.**
 
 ## Versão
 > **Versão**: 1.0.0
 
 ## 🛠️ Autores
-> Rufino Sérgio Panzo, Graduando em Engenharia de Computação
-> <br>Edgar Pereira, Graduando em Engenharia de Computação
+> **Rufino Sérgio Panzo** - Graduando em Engenharia de Computação
+> <br>**Edgar Pereira** - Graduando em Engenharia de Computação
