@@ -1,4 +1,4 @@
-# 🧠 Biomech Analysis Backend (Server)
+# ☁️ Backend - Servidor de Processamento (Google Colab)
 Este repositório contém o código do **Backend** da aplicação de Análise Biomecânica. Ele foi projetado para ser executado no **Google Colab**, aproveitando a aceleração de GPU (T4) para rodar modelos pesados de Inteligência Artificial e Cinemática Inversa.
 
 O servidor expõe uma API REST via **FastAPI**, acessível externamente através de um túnel **Ngrok**.
@@ -8,10 +8,10 @@ O servidor expõe uma API REST via **FastAPI**, acessível externamente através
 O backend opera em uma arquitetura híbrida:
 
 1.  **Ambiente:** Google Colab (Linux + GPU Nvidia T4).
-2.  **Core de IA:** * **MeTRAbs:** Estimação de pose 3D absoluta.
-    * **JAX/MuJoCo:** Otimização cinemática e reconstrução física.
-    * **Gait Transformer:** Análise de fases da marcha baseada em Transformers.
-3.  **Exposição:** PyNgrok cria um túnel seguro (HTTPS) para conectar o ambiente do Colab à internet pública.
+1.  **FastAPI & Uvicorn:** Cria um servidor web assíncrono dentro do notebook.
+2.  **PyNgrok / Cloudflared:** Cria um túnel seguro para expor a API local do Colab para a internet pública.
+3.  **MeTRAbs (Metric-Scale Truncation-Robust Heatmaps):** Modelo responsável pela estimativa de pose 3D absoluta a partir de imagens 2D.
+4.  **JAX & MuJoCo:** Utilizados para cálculos de cinemática inversa e dinâmica multicorpos, garantindo consistência física aos movimentos detectados.
 
 ## 🚀 Como Executar
 
