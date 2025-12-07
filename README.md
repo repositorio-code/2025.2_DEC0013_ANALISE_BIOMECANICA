@@ -112,7 +112,8 @@ python -m PyInstaller --noconsole --onefile --name="Biomech v1.0.0" frontend/app
 - A barra de progresso indicará o envio, processamento na GPU remota e recebimento dos dados.
 
 **5. Resultados**
-- Assim que o processamento finalizar, clique em **BAIXAR ARQUIVOS GERADOS**.
+- Ao finalizar, as imagens de prévia aparecerão na aba "Galeria / Gráficos".
+- Clique em **BAIXAR ARQUIVOS GERADOS**.
 - Um arquivo `.zip` contendo os gráficos, o vídeo com esqueleto (overlay) e os relatórios será salvo.
    
 ## Exemplos de Gráficos Gerados
